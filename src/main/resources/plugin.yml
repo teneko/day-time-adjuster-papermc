@@ -1,4 +1,8 @@
 name: day-time-adjuster
+author: Teneko
 version: '${version}'
 main: io.github.teneko.daytimeadjuster.DayTimeAdjusterPlugin
 api-version: 1.20
+
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}
