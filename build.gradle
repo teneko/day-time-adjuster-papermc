@@ -61,7 +61,7 @@ tasks.build {
 }
 
 processResources {
-    def props = [version: version]
+    def props = [version: version, kotlinVersion: kotlinVersion]
     inputs.properties props
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
