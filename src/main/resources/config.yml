@@ -18,7 +18,7 @@ worlds:
       # The new day_ticks relative to normal day ticks (24000)
       # It is NOT relative to the span between "from" and "to"
       #
-      # Example: If "from: 0" and "to: 0" and "day_ticks: 120000",
+      # Example: If "from: 0" and "to: 0" and "day_ticks: 12000",
       #   then the time between the ticks between 0 (inclusive) and
-      #   0 (inclusive), effectively 1 tick, would be accelerated by factor of 2.
+      #   1 (inclusive), effectively 2 tick, would be accelerated by factor of 2.
       day_ticks: 24000

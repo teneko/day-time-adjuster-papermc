@@ -64,7 +64,7 @@ class DayTimeAdjusterPlugin : JavaPlugin() {
                     .map { between ->
                         // Adapter
                         fun addTicks(ticks: Long) {
-                            world.time += ticks
+                            world.fullTime += ticks
                         }
 
                         DayTimeAdjuster(
