@@ -1,0 +1,24 @@
+# Possible values for "from"/"to":
+# - a tick between 0 and 24000
+# - DAY_START (= 0 ticks)
+# - DAY_TIME_START (= 0 ticks)
+# - NOON (= 6000 ticks)
+# - DAY_TIME_END (= 12000 ticks)
+# - DUSK (= 12000 ticks)
+# - NIGHT_TIME_START (= 13000 ticks)
+# - MIDNIGHT (= 18000 ticks)
+# - NIGHT_TIME_END (= 23000 ticks)
+# - DAWN (= 23000 ticks)
+# - DAY_END (= 24000 ticks)
+enabled: false
+worlds:
+  world:
+    - from: DAY_START
+      to: DAY_END
+      # The new day_ticks relative to normal day ticks (24000)
+      # It is NOT relative to the span between "from" and "to"
+      #
+      # Example: If "from: 0" and "to: 0" and "day_ticks: 120000",
+      #   then the time between the ticks between 0 (inclusive) and
+      #   0 (inclusive), effectively 1 tick, would be accelerated by factor of 2.
+      day_ticks: 24000

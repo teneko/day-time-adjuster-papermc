@@ -1,0 +1,4 @@
+name: day-time-adjuster
+version: '${version}'
+main: io.github.teneko.daytimeadjuster.DayTimeAdjusterPlugin
+api-version: 1.20

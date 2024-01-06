@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id("xyz.jpenilla.run-paper") version "2.2.2"
+    id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'de.teneko'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:" + paperVersion
+    shadow "org.jetbrains.kotlin:kotlin-stdlib:" + kotlinVersion
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    def javaVersion = targetJavaVersion.toInteger()
+    if (javaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(javaVersion)
+    }
+}
+
+tasks {
+    runServer {
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.20.4")
+    }
+}
+
+tasks.build {
+    dependsOn shadowJar
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
